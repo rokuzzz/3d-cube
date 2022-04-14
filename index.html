@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>My first three.js app</title>
+		<title>3d Cube</title>
 		<style>
 			body { margin: 0; }
 		</style>
@@ -35,12 +35,10 @@
             document.body.appendChild( renderer.domElement );
 
             // World
-            const geometry = new THREE.BoxGeometry();
-            var material = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
-
-            // Cube
-            const cube = new THREE.Mesh( geometry, material );
-            scene.add( cube );
+            const geometry = new THREE.TorusKnotGeometry( 10, 2, 100, 16 );
+            const material = new THREE.MeshBasicMaterial( { color: 0xFE8D79 } );
+            const torusKnot = new THREE.Mesh( geometry, material );
+            scene.add( torusKnot );
 
             // Lights
             const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 ); // white directional light at half intensity shining from the top
@@ -65,16 +63,16 @@
 
 			controls.screenSpacePanning = false;
 
-			controls.minDistance = 1;
-			controls.maxDistance = 18;
+			controls.minDistance = 50;
+			controls.maxDistance = 100;
 
 			controls.maxPolarAngle = Math.PI / 2;
 
             function animate() {
                 requestAnimationFrame( animate );
 
-                cube.rotation.x += 0.01;
-                cube.rotation.y += 0.01;
+                torusKnot.rotation.x += 0.01;
+                torusKnot.rotation.y += 0.01;
 
             	// required if controls.enableDamping or controls.autoRotate are set to true
 	            controls.update();
